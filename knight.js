@@ -20,3 +20,16 @@ function move(position, move) {
 }
 
 console.log(move([3, 3], [1, 2])); // [4,5]
+
+function getPossibleMoves(position) {
+  const possiblities = [];
+  for (const offset of moves) {
+    const location = move(position, offset);
+    if (Array.isArray(location)) {
+      possiblities.push(offset);
+    }
+  }
+  return possiblities;
+}
+
+console.log(getPossibleMoves([0, 0])); // Possible moves: [1,2], [2,1]
