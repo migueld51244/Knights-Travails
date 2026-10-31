@@ -49,20 +49,20 @@ getPossibleDestinations([3, 0]); // Possible destinations: [1,2], [2,1]
 
 function knightMoves(start, target) {
   const queue = [start];
-  const visited = new Map();
-  let moves = 0;
+  const visited = new Set();
+  const path = [];
   while (queue.length) {
     const current = queue.shift();
-    const possibilities = getPossibleDestinations(current);
-    if(visited.has(current.toString())) {
+    if (visited.has(current.toString())) {
       continue;
     }
-    visited.set(current.toString());
+    const possibilities = getPossibleDestinations(current);
+
+    visited.add(current.toString());
     queue.push(...possibilities);
     if (current[0] === target[0] && current[1] === target[1]) {
-      return "done in " + moves + " moves";
+      return `You made it in ${path.length - 1} moves! Here's your path:`;
     }
-    moves++;
   }
 }
 
