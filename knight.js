@@ -33,3 +33,16 @@ function getPossibleMoves(position) {
 }
 
 console.log(getPossibleMoves([0, 0])); // Possible moves: [1,2], [2,1]
+
+function getPossibleDestinations(position) {
+  const possiblities = [];
+  for (const offset of moves) {
+    const location = move(position, offset);
+    if (Array.isArray(location)) {
+      possiblities.push(location);
+    }
+  }
+  return possiblities;
+}
+
+console.log(getPossibleDestinations([3, 0])); // Possible destinations: [1,2], [2,1]
