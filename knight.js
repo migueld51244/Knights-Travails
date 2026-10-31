@@ -19,7 +19,7 @@ function move(position, move) {
   return [x, y];
 }
 
-console.log(move([3, 3], [1, 2])); // [4,5]
+move([3, 3], [1, 2]); // [4,5]
 
 function getPossibleMoves(position) {
   const possibilities = [];
@@ -32,7 +32,7 @@ function getPossibleMoves(position) {
   return possibilities;
 }
 
-console.log(getPossibleMoves([0, 0])); // Possible moves: [1,2], [2,1]
+getPossibleMoves([0, 0]); // Possible moves: [1,2], [2,1]
 
 function getPossibleDestinations(position) {
   const possibilities = [];
@@ -45,4 +45,25 @@ function getPossibleDestinations(position) {
   return possibilities;
 }
 
-console.log(getPossibleDestinations([3, 0])); // Possible destinations: [1,2], [2,1]
+getPossibleDestinations([3, 0]); // Possible destinations: [1,2], [2,1]
+
+function knightMoves(start, target) {
+  const queue = [start];
+  const visited = new Map();
+  let moves = 0;
+  while (queue.length) {
+    const current = queue.shift();
+    const possibilities = getPossibleDestinations(current);
+    if(visited.has(current.toString())) {
+      continue;
+    }
+    visited.set(current.toString());
+    queue.push(...possibilities);
+    if (current[0] === target[0] && current[1] === target[1]) {
+      return "done in " + moves + " moves";
+    }
+    moves++;
+  }
+}
+
+console.log(knightMoves([0, 0], [2, 4]));
