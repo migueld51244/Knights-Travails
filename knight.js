@@ -1,3 +1,14 @@
+const moves = [
+  [1, 2],
+  [-1, 2],
+  [1, -2],
+  [-1, -2],
+  [2, 1],
+  [-2, 1],
+  [2, -1],
+  [-2, -1],
+];
+
 function move(position, move) {
   const x = position[0] + move[0];
   const y = position[1] + move[1];
