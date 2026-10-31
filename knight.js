@@ -48,6 +48,11 @@ function getPossibleDestinations(position) {
 getPossibleDestinations([3, 0]); // Possible destinations: [1,2], [2,1]
 
 function knightMoves(start, target) {
+  const printPath = () => {
+    for (const node of path) {
+      console.log(node);
+    }
+  };
   const queue = [start];
   const visited = new Set();
   const path = [];
@@ -56,14 +61,18 @@ function knightMoves(start, target) {
     if (visited.has(current.toString())) {
       continue;
     }
+
+    path.push(current);
     const possibilities = getPossibleDestinations(current);
 
     visited.add(current.toString());
     queue.push(...possibilities);
     if (current[0] === target[0] && current[1] === target[1]) {
-      return `You made it in ${path.length - 1} moves! Here's your path:`;
+      console.log(`You made it in ${path.length} moves! Here's your path:`);
+      printPath();
+      return;
     }
   }
 }
 
-console.log(knightMoves([0, 0], [2, 4]));
+knightMoves([3, 3], [4, 3]);
