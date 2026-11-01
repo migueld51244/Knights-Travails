@@ -35,6 +35,15 @@ function getPossibleDestinations(position) {
 getPossibleDestinations([3, 0]); // Possible destinations: [1,2], [2,1]
 
 function knightMoves(start, target) {
+  const printPath = () => {
+    const path = [];
+    let current = target;
+    while (current) {
+      path.push(current);
+      current = previous.get(current.toString());
+    }
+    return path.reverse();
+  };
   const queue = [start];
   const visited = new Set();
   const previous = new Map();
@@ -42,14 +51,8 @@ function knightMoves(start, target) {
   while (queue.length) {
     // Get last
     const current = queue.shift();
-    previous.get(current.toString());
-    if (visited.has(current.toString())) {
-      continue;
-    }
-
     const possibilities = getPossibleDestinations(current);
 
-    visited.add(current.toString());
     for (const destination of possibilities) {
       if (visited.has(destination.toString())) {
         continue;
@@ -61,7 +64,7 @@ function knightMoves(start, target) {
       queue.push(destination);
     }
     if (current[0] === target[0] && current[1] === target[1]) {
-      console.log(`You made it in ${previous.length} moves! Here's your path:`);
+      console.log(`You made it in ${previous.size} moves! Here's your path:`);
       printPath();
       return;
     }
