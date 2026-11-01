@@ -36,13 +36,16 @@ getPossibleDestinations([3, 0]); // Possible destinations: [1,2], [2,1]
 
 function knightMoves(start, target) {
   const path = [];
-  const printPath = () => {
+  const getPath = () => {
     let current = target;
     while (current) {
       path.push(current);
       current = previous.get(current.toString());
     }
     path.reverse();
+  };
+
+  const printPath = () => {
     for (const position of path) {
       console.log(position);
     }
@@ -55,7 +58,8 @@ function knightMoves(start, target) {
     // Get last
     const current = queue.shift();
     if (current[0] === target[0] && current[1] === target[1]) {
-      console.log(`You made it in ${path.length} moves! Here's your path:`);
+      getPath();
+      console.log(`You made it in ${path.length - 1} moves! Here's your path:`);
       printPath();
       return;
     }
@@ -74,4 +78,4 @@ function knightMoves(start, target) {
   }
 }
 
-knightMoves([3, 3], [4, 3]);
+knightMoves([3, 3], [3, 3]);
