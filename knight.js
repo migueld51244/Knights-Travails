@@ -21,19 +21,6 @@ function move(position, move) {
 
 move([3, 3], [1, 2]); // [4,5]
 
-function getPossibleMoves(position) {
-  const possibilities = [];
-  for (const offset of moves) {
-    const location = move(position, offset);
-    if (Array.isArray(location)) {
-      possibilities.push(offset);
-    }
-  }
-  return possibilities;
-}
-
-getPossibleMoves([0, 0]); // Possible moves: [1,2], [2,1]
-
 function getPossibleDestinations(position) {
   const possibilities = [];
   for (const offset of moves) {
